@@ -99,6 +99,7 @@ Linac::Linac(const std::string& Key)  :
   attachSystem::ContainedComp(),
   attachSystem::FixedOffset(Key,17), attachSystem::CellMap(),
   beamDump(new BeamDump(Key,"BeamDump")),
+  fc2(new FaradayCup(Key,"FC2")),
   fc4(new FaradayCup(Key,"FC4")),
   dtl(new DTLArray(Key,"DTLArray"))
   /*!
@@ -109,6 +110,7 @@ Linac::Linac(const std::string& Key)  :
   ELog::RegMethod RegA("Linac","Linac(const std::string&)");
   ModelSupport::objectRegister& OR = ModelSupport::objectRegister::Instance();
   OR.addObject(beamDump);
+  OR.addObject(fc2);
   OR.addObject(fc4);
   OR.addObject(dtl);
 }
@@ -135,6 +137,7 @@ Linac::Linac(const Linac& A) :
   nStubs(A.nStubs),
   nDTL(A.nDTL),
   beamDump(new BeamDump(*A.beamDump)),
+  fc2(new FaradayCup(*A.fc2)),
   fc4(new FaradayCup(*A.fc4)),
   dtl(A.dtl)
   /*!
@@ -175,6 +178,7 @@ Linac::operator=(const Linac& A)
       nStubs=A.nStubs;
       nDTL=A.nDTL;
       *beamDump=*A.beamDump;
+      *fc2=*A.fc2;
       *fc4=*A.fc4;
       *dtl=*A.dtl;
     }
@@ -481,6 +485,9 @@ Linac::createAll(Simulation& System,
 
       beamDump->createAll(System,*dtl,backLP);
       attachSystem::addToInsertControl(System,*this,*beamDump);
+
+      fc2->createAll(System,*dtl,backLP);
+      attachSystem::addToInsertControl(System,*dtl->getDTL(1),*fc2);
 
       fc4->createAll(System,*dtl,backLP);
       attachSystem::addToInsertControl(System,*this,*fc4);

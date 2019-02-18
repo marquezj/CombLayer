@@ -73,6 +73,7 @@ class Linac : public attachSystem::ContainedComp,
   size_t nDTL; ///< number of DTL tanks
 
   std::shared_ptr<BeamDump> beamDump; ///< linac 4 commissionning dump
+  std::shared_ptr<FaradayCup> fc2; ///< Faraday Cup 2
   std::shared_ptr<FaradayCup> fc4; ///< Faraday Cup 4
   std::shared_ptr<DTLArray> dtl;   /// array of DTL tanks
 
