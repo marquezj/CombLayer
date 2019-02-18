@@ -297,7 +297,7 @@ EssLinacVariables(FuncDataBase& Control)
 
   // Faraday cup DTL 2 FC.
   // Dimensions: https://confluence.esss.lu.se/display/BIG/DTL+FCs
-  Control.addVariable("LinacFC2Length", 3.25);
+  Control.addVariable("LinacFC2Length", 2.85); // ED 18 Feb 2019 (32.5 in Confluence is wrong)
   Control.addVariable("LinacFC2OuterRadius", 3.0);
   Control.addVariable("LinacFC2InnerRadius", 2.0);
   Control.addVariable("LinacFC2FaceLength", 0.0);
