@@ -99,7 +99,7 @@ Linac::Linac(const std::string& Key)  :
   attachSystem::ContainedComp(),
   attachSystem::FixedOffset(Key,17), attachSystem::CellMap(),
   beamDump(new BeamDump(Key,"BeamDump")),
-  faradayCup(new FaradayCup(Key,"FaradayCup")),
+  fc4(new FaradayCup(Key,"FC4")),
   dtl(new DTLArray(Key,"DTLArray"))
   /*!
     Constructor BUT ALL variable are left unpopulated.
@@ -109,7 +109,7 @@ Linac::Linac(const std::string& Key)  :
   ELog::RegMethod RegA("Linac","Linac(const std::string&)");
   ModelSupport::objectRegister& OR = ModelSupport::objectRegister::Instance();
   OR.addObject(beamDump);
-  OR.addObject(faradayCup);
+  OR.addObject(fc4);
   OR.addObject(dtl);
 }
 
@@ -135,7 +135,7 @@ Linac::Linac(const Linac& A) :
   nStubs(A.nStubs),
   nDTL(A.nDTL),
   beamDump(new BeamDump(*A.beamDump)),
-  faradayCup(new FaradayCup(*A.faradayCup)),
+  fc4(new FaradayCup(*A.fc4)),
   dtl(A.dtl)
   /*!
     Copy constructor
@@ -175,7 +175,7 @@ Linac::operator=(const Linac& A)
       nStubs=A.nStubs;
       nDTL=A.nDTL;
       *beamDump=*A.beamDump;
-      *faradayCup=*A.faradayCup;
+      *fc4=*A.fc4;
       *dtl=*A.dtl;
     }
   return *this;
@@ -482,8 +482,8 @@ Linac::createAll(Simulation& System,
       beamDump->createAll(System,*dtl,backLP);
       attachSystem::addToInsertControl(System,*this,*beamDump);
 
-      faradayCup->createAll(System,*dtl,backLP);
-      attachSystem::addToInsertControl(System,*this,*faradayCup);
+      fc4->createAll(System,*dtl,backLP);
+      attachSystem::addToInsertControl(System,*this,*fc4);
     }
   buildTSW(System);
 

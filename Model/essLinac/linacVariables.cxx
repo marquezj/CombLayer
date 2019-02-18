@@ -242,55 +242,77 @@ EssLinacVariables(FuncDataBase& Control)
   Control.addVariable("LinacBeamDumpWaterPipeDist", 0.05*SCALE52tr); // measured on SPLTDISH005
 
   
-  // Faraday cup DTL 2 FC.
+  // Faraday cup DTL 4 FC.
   // Dimensions: https://confluence.esss.lu.se/display/BIG/DTL+FCs
-  Control.addVariable("LinacFaradayCupActive", 1.0);
-  Control.addVariable("LinacFaradayCupYStep", 206.3397); // arbitrary distance from the end of last DTL
-  Control.addVariable("LinacFaradayCupEngineeringActive", 1);
-  Control.addVariable("LinacFaradayCupLength", 3.25);
-  Control.addVariable("LinacFaradayCupOuterRadius", 3.0);
-  Control.addVariable("LinacFaradayCupInnerRadius", 2.0);
-  Control.addVariable("LinacFaradayCupFaceLength", 0.0);
-  Control.addVariable("LinacFaradayCupFaceRadius", 1.8);
-  Control.addVariable("LinacFaradayCupAbsorberLength", 0.25);
-  Control.addVariable("LinacFaradayCupAbsorberMat", "Graphite600K");
-  Control.addVariable("LinacFaradayCupAbsorberTemp", 600.0);
-  Control.addVariable("LinacFaradayCupCollectorLength", 0.7);
-  Control.addParse<double>("LinacFaradayCupBaseLength",
-		   "LinacFaradayCupLength-LinacFaradayCupAbsorberLength-LinacFaradayCupCollectorLength-0.5");
-  Control.addVariable("LinacFaradayCupBaseMat", "Void"); // FC2: void, FC4: Graphite
+  Control.addVariable("LinacFC4Active", 1.0);
+  Control.addVariable("LinacFC4YStep", 206.3397); // arbitrary distance from the end of last DTL
+  Control.addVariable("LinacFC4EngineeringActive", 1);
+  Control.addVariable("LinacFC4Length", 3.3);
+  Control.addVariable("LinacFC4OuterRadius", 3.0);
+  Control.addVariable("LinacFC4InnerRadius", 2.0);
+  Control.addVariable("LinacFC4FaceLength", 0.0);
+  Control.addVariable("LinacFC4FaceRadius", 1.8);
+  Control.addVariable("LinacFC4AbsorberLength", 0.1);
+  Control.addVariable("LinacFC4AbsorberMat", "TZM600K");
+  Control.addVariable("LinacFC4AbsorberTemp", 600.0);
+  Control.addVariable("LinacFC4CollectorLength", 0.0);
+  Control.addParse<double>("LinacFC4BaseLength",
+		   "LinacFC4Length-LinacFC4AbsorberLength-LinacFC4CollectorLength-0.3");
+  Control.addVariable("LinacFC4BaseMat", "Graphite"); // FC2: void, FC4: Graphite
 
-  Control.addVariable("LinacFaradayCupCollectorMat", "Graphite");
+  Control.addVariable("LinacFC4CollectorMat", "Graphite");
 
-  Control.addVariable("LinacFaradayCupWallMat", "Copper");
+  Control.addVariable("LinacFC4WallMat", "Copper");
 
-  // FC dimensiona as of Wolfgang Hees email 13 Feb 2019
-  Control.addVariable("LinacFaradayCupNShieldLayers", 3);
-  Control.addVariable("LinacFaradayCupShieldMat1","Air");
-  Control.addVariable("LinacFaradayCupShieldMat2","SS304L");
-  Control.addVariable("LinacFaradayCupShieldMat3","SkanskaConcrete");
-  Control.addVariable("LinacFaradayCupShieldWidthLeft1",12.0);
-  Control.addVariable("LinacFaradayCupShieldWidthLeft2",35.0);
-  Control.addVariable("LinacFaradayCupShieldWidthLeft3",110.0);
-  Control.addParse<double>("LinacFaradayCupShieldWidthRight1",
-			   "LinacFaradayCupShieldWidthLeft1");
-  Control.addParse<double>("LinacFaradayCupShieldWidthRight2",
-			   "LinacFaradayCupShieldWidthLeft2");
-  Control.addParse<double>("LinacFaradayCupShieldWidthRight3",
-			   "LinacFaradayCupShieldWidthLeft3");
-  Control.addVariable("LinacFaradayCupShieldHeight1",10.0);
-  Control.addVariable("LinacFaradayCupShieldHeight2",25.0);
-  Control.addVariable("LinacFaradayCupShieldHeight3",125.0);
-  Control.addParse<double>("LinacFaradayCupShieldDepth1",
-			   "LinacFaradayCupShieldHeight1");
-  Control.addParse<double>("LinacFaradayCupShieldDepth2",
-			   "LinacFaradayCupShieldHeight2");
-  Control.addParse<double>("LinacFaradayCupShieldDepth3",
-			   "LinacFaradayCupShieldHeight3");
-  Control.addVariable("LinacFaradayCupShieldForwardLength1",10.0);
-  Control.addVariable("LinacFaradayCupShieldForwardLength2",30.0);
-  Control.addVariable("LinacFaradayCupShieldForwardLength3",130.0);
-  Control.addVariable("LinacFaradayCupShieldBackLength",170.0);
+  // FC dimensions as of Wolfgang Hees email 13 Feb 2019
+  Control.addVariable("LinacFC4NShieldLayers", 3);
+  Control.addVariable("LinacFC4ShieldMat1","Air");
+  Control.addVariable("LinacFC4ShieldMat2","SS304L");
+  Control.addVariable("LinacFC4ShieldMat3","SkanskaConcrete");
+  Control.addVariable("LinacFC4ShieldWidthLeft1",12.0);
+  Control.addVariable("LinacFC4ShieldWidthLeft2",35.0);
+  Control.addVariable("LinacFC4ShieldWidthLeft3",110.0);
+  Control.addParse<double>("LinacFC4ShieldWidthRight1",
+			   "LinacFC4ShieldWidthLeft1");
+  Control.addParse<double>("LinacFC4ShieldWidthRight2",
+			   "LinacFC4ShieldWidthLeft2");
+  Control.addParse<double>("LinacFC4ShieldWidthRight3",
+			   "LinacFC4ShieldWidthLeft3");
+  Control.addVariable("LinacFC4ShieldHeight1",10.0);
+  Control.addVariable("LinacFC4ShieldHeight2",25.0);
+  Control.addVariable("LinacFC4ShieldHeight3",125.0);
+  Control.addParse<double>("LinacFC4ShieldDepth1",
+			   "LinacFC4ShieldHeight1");
+  Control.addParse<double>("LinacFC4ShieldDepth2",
+			   "LinacFC4ShieldHeight2");
+  Control.addParse<double>("LinacFC4ShieldDepth3",
+			   "LinacFC4ShieldHeight3");
+  Control.addVariable("LinacFC4ShieldForwardLength1",10.0);
+  Control.addVariable("LinacFC4ShieldForwardLength2",30.0);
+  Control.addVariable("LinacFC4ShieldForwardLength3",130.0);
+  Control.addVariable("LinacFC4ShieldBackLength",170.0);
+
+  // // Faraday cup DTL 2 FC.
+  // // Dimensions: https://confluence.esss.lu.se/display/BIG/DTL+FCs
+  // Control.addVariable("LinacFaradayCupActive", 1.0);
+  // Control.addVariable("LinacFaradayCupYStep", 206.3397); // arbitrary distance from the end of last DTL
+  // Control.addVariable("LinacFaradayCupEngineeringActive", 1);
+  // Control.addVariable("LinacFaradayCupLength", 3.25);
+  // Control.addVariable("LinacFaradayCupOuterRadius", 3.0);
+  // Control.addVariable("LinacFaradayCupInnerRadius", 2.0);
+  // Control.addVariable("LinacFaradayCupFaceLength", 0.0);
+  // Control.addVariable("LinacFaradayCupFaceRadius", 1.8);
+  // Control.addVariable("LinacFaradayCupAbsorberLength", 0.25);
+  // Control.addVariable("LinacFaradayCupAbsorberMat", "Graphite600K");
+  // Control.addVariable("LinacFaradayCupAbsorberTemp", 600.0);
+  // Control.addVariable("LinacFaradayCupCollectorLength", 0.7);
+  // Control.addParse<double>("LinacFaradayCupBaseLength",
+  // 		   "LinacFaradayCupLength-LinacFaradayCupAbsorberLength-LinacFaradayCupCollectorLength-0.5");
+  // Control.addVariable("LinacFaradayCupBaseMat", "Void"); // FC2: void, FC4: Graphite
+
+  // Control.addVariable("LinacFaradayCupCollectorMat", "Graphite");
+
+  // Control.addVariable("LinacFaradayCupWallMat", "Copper");
 
   // DTL
   const size_t nDTL = 4;
