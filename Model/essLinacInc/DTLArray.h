@@ -55,6 +55,7 @@ class DTLArray : public attachSystem::CopiedComp,
   virtual DTLArray* clone() const;
   virtual ~DTLArray();
 
+  const std::shared_ptr<DTL> getDTL(size_t n) { return dtl[n]; }
   void createAll(Simulation&,const attachSystem::FixedComp&,const long int);
 
 };
