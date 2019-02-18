@@ -519,6 +519,11 @@ FaradayCup::createLinks()
       FixedComp::setConnect(5,Origin+Z*(outerRadius)+Y*(length/2.0),Z);
       FixedComp::setLinkSurf(5,SMap.realSurf(buildIndex+17));
       FixedComp::setBridgeSurf(5,SMap.realSurf(buildIndex+500));
+
+      // 6 is a dummy LP (same as 5) to have the same number of LPs as with nShieldLayers>0
+      FixedComp::setConnect(6,Origin+Z*(outerRadius)+Y*(length/2.0),Z);
+      FixedComp::setLinkSurf(6,SMap.realSurf(buildIndex+17));
+      FixedComp::setBridgeSurf(6,SMap.realSurf(buildIndex+500));
     }
 
   return;
