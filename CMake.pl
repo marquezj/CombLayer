@@ -52,15 +52,15 @@ my @incdir=qw( include beamlineInc globalInc instrumentInc
 
 my @mainLib=qw( visit src simMC  construct physics input process 
     transport scatMat endf crystal source monte funcBase log monte 
-    flukaMagnetic flukaProcess flukaPhysics 
-    flukaTally phitsProcess phitsPhysics 
+    flukaProcess flukaPhysics 
+    flukaTally phitsProcess  
     phitsTally phitsSupport tally 
     geometry mersenne src world work 
     xml poly support weights 
     insertUnit md5 construct 
-    global constructVar physics simMC 
-    scatMat endf crystal transport 
-    attachComp visit poly);
+    global constructVar physics simMC transport 
+    attachComp visit poly flukaMagnetic phitsPhysics
+    scatMat endf crystal);
 
 my $gM=new CMakeList;
 $gM->setParameters(\@ARGV);
@@ -78,30 +78,47 @@ $gM->findSubSrcDir("Model/MaxIV");
 print STDERR "ERER \n";
 $gM->findSubSrcDir("","Aunit");
 
-my @ess = qw( essBuild );
-my @essSupport = qw( essConstruct commonVar common
-		     beer  bifrost  cspec  dream  estia 
-		     freia  heimdal  loki  magic  miracles 
-		     nmx  nnbar  odin  skadi  testBeam 
-		     trex  vor  vespa shortOdin shortNmx
-		     shortDream simpleItem beamline instrument );
+my @ess = qw( essBuild beer input input  process  source  funcBase  
+              log  monte  flukaProcess  flukaPhysics  
+              flukaTally  phitsProcess  phitsTally  
+              phitsSupport  tally  geometry  mersenne  
+              src  world  work  xml  support  weights  
+              insertUnit  md5  construct  global  
+              constructVar  physics  simMC  transport  
+              attachComp  visit  poly  flukaMagnetic  
+              phitsPhysics  scatMat  endf  crystal  
+              essConstruct  commonVar  common  bifrost  
+              cspec  dream  estia  freia  heimdal  loki  
+              magic  miracles  nmx  nnbar  odin  skadi  
+              testBeam  trex  vor  vespa  shortOdin  
+              shortNmx  shortDream  simpleItem  beamline  
+              instrument );
 
-push(@ess,@mainLib);
-$gM->addDepUnit("ess", [@ess,@essSupport]);
+$gM->addDepUnit("ess", [@ess]);
  
 
-my @essBeam = qw( essBuild );
-push(@essBeam,@mainLib);
-$gM->addDepUnit("essBeamline", [@essBeam,@essSupport]);
+my @essBeam = qw( essBuild beer input process source funcBase 
+                  log monte flukaProcess flukaPhysics flukaTally 
+                  phitsProcess phitsTally phitsSupport tally geometry 
+                  mersenne src world work xml support weights insertUnit 
+                  md5 construct global physics simMC transport attachComp 
+                  visit poly flukaMagnetic phitsPhysics scatMat endf crystal 
+                  common bifrost cspec dream estia freia heimdal loki magic 
+                  miracles nmx nnbar odin skadi testBeam trex vor vespa 
+                  shortOdin shortNmx shortDream simpleItem instrument 
+                  essConstruct commonVar constructVar beamline );
+$gM->addDepUnit("essBeamline", [@essBeam]);
 
 
-my @maxiv = qw( maxivBuild );
-push(@maxiv,@mainLib);
-$gM->addDepUnit("maxiv", [@maxiv,
-			  qw(R3Common balder cosaxs danmax
-                             flexpes formax maxpeem  micromax 
-			     commonGenerator commonBeam R3Common R1Common species)]);
-
+my @maxiv = qw( maxivBuild balder cosaxs danmax input process 
+                source funcBase log monte flukaProcess flukaPhysics 
+                flukaTally phitsProcess phitsTally phitsSupport tally 
+                geometry mersenne src world work xml support weights 
+                insertUnit md5 construct global constructVar physics 
+                simMC transport attachComp visit poly flukaMagnetic 
+                phitsPhysics scatMat endf crystal flexpes formax maxpeem 
+                micromax commonGenerator commonBeam R3Common R1Common species );
+$gM->addDepUnit("maxiv", [@maxiv]);
 
 
 my @filter = qw( filter photon );
@@ -113,7 +130,7 @@ my @bilbau = qw( bibBuild );
 push(@bilbau,@mainLib);
 $gM->addDepUnit("bilbau", [@bilbau]),
 			   			   
-my @fullBuild = qw( build chip moderator build zoom imat );
+my @fullBuild = qw( moderator build chip build zoom imat );
 push(@fullBuild,@mainLib);
 $gM->addDepUnit("fullBuild", [@fullBuild]),
 
@@ -131,11 +148,11 @@ $gM->addDepUnit("lens", [@lens]);
 
 $gM->addDepUnit("simple", [@mainLib]);
 
-my @t1MarkII = qw( t1Upgrade t1Build imat chip zoom build moderator ) ;
+my @t1MarkII = qw( t1Upgrade t1Build build moderator imat chip zoom  ) ;
 push(@t1MarkII,@mainLib);
 $gM->addDepUnit("t1MarkII", [@t1MarkII]);
 
-my @t1Eng = qw( t1Engineer t1Upgrade t1Build imat chip zoom build moderator ) ;
+my @t1Eng = qw( t1Engineer t1Upgrade t1Build build moderator imat chip zoom  ) ;
 push(@t1Eng,@mainLib);
 $gM->addDepUnit("t1Eng", [@t1Eng]);
 
@@ -155,11 +172,10 @@ my @pipe = qw( pipeBuild ) ;
 push(@pipe,@mainLib);
 $gM->addDepUnit("pipe", [@pipe]);
 
-my @singleItem = qw( singleItemBuild ) ;
+my @singleItem = qw( singleItemBuild commonVar commonGenerator R3Common ) ;
 push(@singleItem,@mainLib);
 $gM->addDepUnit("singleItem", [@singleItem,
-			       qw(commonGenerator commonVar 
-			       commonBeam R3Common )]);
+			       qw( commonBeam  )]);
 
 my @t1Real = qw( t1Build build imat moderator chip zoom ) ;
 push(@t1Real,@mainLib);
